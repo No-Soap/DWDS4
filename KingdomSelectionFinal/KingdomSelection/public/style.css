@@ -1,0 +1,236 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Crimson+Text:wght@400;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Crimson Text', serif;
+  background: linear-gradient(0deg, #1a0a00 0%, #2a1500 20%, #1a0a0a 40%, #0f0f0f 60%, #000000 100%);
+  background-attachment: fixed;
+  color: #dc143c;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(0, 0, 0, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(32, 32, 32, 0.2) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(16, 16, 16, 0.3) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+h1 {
+  font-family: 'Cinzel', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #dc143c;
+  text-align: center;
+  margin-bottom: 40px;
+  text-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(220, 20, 60, 0.3);
+  letter-spacing: 2px;
+  background: linear-gradient(45deg, #dc143c, #ff0000, #dc143c);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.form-container {
+  background: rgba(10, 10, 10, 0.9);
+  border: 3px solid #dc143c;
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 
+    0 0 30px rgba(220, 20, 60, 0.4),
+    inset 0 0 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  max-width: 500px;
+  width: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+input, select, button {
+  padding: 15px;
+  border: 2px solid #333333;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.2);
+  color: #dc143c;
+  font-family: 'Crimson Text', serif;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #dc143c;
+  box-shadow: 0 0 15px rgba(220, 20, 60, 0.5);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+input::placeholder {
+  color: #8a4a4a;
+}
+
+select option {
+  background: #1a1a1a;
+  color: #dc143c;
+}
+
+select option:disabled {
+  color: #666;
+  background: #1a1a1a;
+}
+
+button {
+  background: linear-gradient(45deg, #333333, #dc143c);
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 18px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-family: 'Cinzel', serif;
+}
+
+button:hover {
+  background: linear-gradient(45deg, #dc143c, #ff0000);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(220, 20, 60, 0.4);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+#message {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+}
+
+.admin-panel {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(10, 10, 10, 0.95);
+  border: 2px solid #333333;
+  border-radius: 10px;
+  padding: 15px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  z-index: 1000;
+}
+
+.admin-panel input {
+  width: 150px;
+  padding: 8px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.admin-panel button {
+  padding: 8px 15px;
+  font-size: 12px;
+  width: 100%;
+}
+
+.admin-panel label {
+  color: #dc143c;
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 5px;
+  font-family: 'Cinzel', serif;
+}
+
+/* Admin page specific styles */
+.admin-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+.admin-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+}
+
+#playerList {
+  background: rgba(10, 10, 10, 0.9);
+  border: 2px solid #333333;
+  border-radius: 10px;
+  padding: 20px;
+  margin-bottom: 30px;
+  list-style: none;
+}
+
+#playerList li {
+  padding: 10px;
+  border-bottom: 1px solid #333333;
+  color: #dc143c;
+  font-size: 16px;
+}
+
+#playerList li:last-child {
+  border-bottom: none;
+}
+
+#removeForm {
+  background: rgba(10, 10, 10, 0.9);
+  border: 2px solid #333333;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+  
+  .form-container {
+    padding: 30px 20px;
+    margin: 20px;
+  }
+  
+  .admin-panel {
+    bottom: 10px;
+    right: 10px;
+    padding: 10px;
+  }
+  
+  .admin-panel input {
+    width: 120px;
+  }
+}

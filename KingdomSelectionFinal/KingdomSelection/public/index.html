@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kingdom Selection</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to A Dance with Dragons Season 4</h1>
+    <div class="form-container">
+      <form id="form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <select name="kingdom" id="kingdomSelect" required></select>
+        <button type="submit">Join Kingdom</button>
+      </form>
+      <p id="message"></p>
+    </div>
+  </div>
+  
+  <div class="admin-panel">
+    <label for="adminPassword">Admin Password:</label>
+    <input type="password" id="adminPassword" placeholder="Enter password">
+    <button onclick="accessAdmin()">Access Admin</button>
+  </div>
+
+  <script>
+    async function loadOptions() {
+      const res = await fetch('/api/data');
+      const { percentages } = await res.json();
+      const caps = { Baratheon: 30, Nytheris: 25, Dwarven: 15, Lannister: 15, Blackfyre: 15 };
+      const select = document.getElementById('kingdomSelect');
+      select.innerHTML = '';
+      for (const [kingdom, cap] of Object.entries(caps)) {
+        const percent = percentages[kingdom] || 0;
+        const option = document.createElement('option');
+        option.value = kingdom;
+        option.textContent = `${kingdom} (${percent.toFixed(1)}%)`;
+        if (percent >= cap) option.disabled = true;
+        select.appendChild(option);
+      }
+    }
+
+    document.getElementById('form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const form = new FormData(e.target);
+      const res = await fetch('/api/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(form))
+      });
+      const message = await res.text();
+      document.getElementById('message').textContent = message;
+      loadOptions();
+    });
+
+    loadOptions();
+
+    function accessAdmin() {
+      const password = document.getElementById('adminPassword').value;
+      if (password) {
+        window.location.href = `/admin?password=${encodeURIComponent(password)}`;
+      }
+    }
+
+    // Allow Enter key in admin password field
+    document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        accessAdmin();
+      }
+    });
+  </script>
+</body>
+</html>
